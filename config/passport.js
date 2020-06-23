@@ -10,8 +10,6 @@ module.exports=function(passport){
         callbackURL:'/auth/google/callback',
         proxy:true
     },(accessToken,refreshToken,profile,done)=>{
-       // console.log(accessToken)
-        console.log(profile.photos[0].value)
         User.findOne({
             googleID:profile.id
         })
@@ -27,7 +25,6 @@ module.exports=function(passport){
                     image:profile.photos[0].value
                 })
                 user.save().then(()=>{
-                    console.log('donee')
                     done(null,user)
                 }).catch(err=>console.log(err))
             }
